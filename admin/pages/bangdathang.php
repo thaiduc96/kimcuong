@@ -2,7 +2,7 @@
 //require("../../thuvien/database.php");
 //require("../../thuvien/trangadmin.php");
 
-$xacnhan=$_POST['xacnhan'];
+$xacnhan = $_POST['xacnhan'];
 ?>
 
 <div class="col-md-12 col-xs-12 col-sm-12">
@@ -21,29 +21,33 @@ $xacnhan=$_POST['xacnhan'];
               </tr>
             </thead>
             <tbody>
-            <?php 
-             	$i=0;
-             	$tongtien=0;
-             	$dathang=dathang($xacnhan);
-              while($row=mysql_fetch_array($dathang))
-              {
-                $i++;
-            ?>
+            <?php
+$i = 0;
+$tongtien = 0;
+$dathang = $trangadmin->dathang($xacnhan);
+//while($row=mysql_fetch_array($dathang))
+foreach ($dathang as $row) {
+    $i++;
+    ?>
               <tr >
-                <td style="text-align: center"><?=$i?></td>
-                <td style="text-align: center" class="sanphamdathang" idDatHang="<?=$row['idDH']?>" ><?=$row['idDH']?></td>
-                <td style="text-align: center"><?=$row['tennguoinhan']?></td>
-                <td style="text-align: center"><?=$row['noinhan']?></td>
+                <td style="text-align: center"><?= $i ?></td>
+                <td style="text-align: center" class="sanphamdathang" idDatHang="<?= $row['idDH'] ?>" ><?= $row['idDH'] ?></td>
+                <td style="text-align: center"><?= $row['tennguoinhan'] ?></td>
+                <td style="text-align: center"><?= $row['noinhan'] ?></td>
 
-                <td style="text-align: center"><?=$row['sdt']?></td>
-                 <td style="text-align: center"><?=$row['ghichu']?></td>
-                <td style="text-align: center"><?=$row['sotien']?></td>
-                <td style="text-align: center"><?php if($row['xacnhan']==1) {echo"Đã nhận đơn hàng";} else{echo "Chưa nhận";}?></td>
+                <td style="text-align: center"><?= $row['sdt'] ?></td>
+                 <td style="text-align: center"><?= $row['ghichu'] ?></td>
+                <td style="text-align: center"><?= $row['sotien'] ?></td>
+                <td style="text-align: center"><?php if ($row['xacnhan'] == 1) {
+        echo "Đã nhận đơn hàng";
+    } else {
+        echo "Chưa nhận";
+    } ?></td>
                 
               </tr>
-             <?php 
-             	$tongtien+=$row['sotien'];
-             } ?>
+             <?php
+    $tongtien += $row['sotien'];
+} ?>
             </tbody>
           </table>
 
